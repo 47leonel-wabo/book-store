@@ -5,6 +5,7 @@ import com.aiwa.bookstore.service.BookService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import java.net.InetAddress
 
 @RestController
 @RequestMapping(path = ["/api/v1/books"])
@@ -24,4 +25,7 @@ class AppController(val bookService: BookService) {
         bookService.remove(id)
         return ResponseEntity("Book with ID $id removed!", HttpStatus.OK)
     }
+
+    @GetMapping(path = ["/app-status"])
+    fun getAppStatus(): ResponseEntity<String> = ResponseEntity("Application UP & RUNNING from: ${InetAddress.getLocalHost()}", HttpStatus.OK)
 }
